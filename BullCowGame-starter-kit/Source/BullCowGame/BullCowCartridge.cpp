@@ -7,6 +7,7 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     PrintLine(TEXT("Elcome to Bull Cows!"));
     PrintLine(TEXT("Guess the 3 letter word!")); // Need to remove the number later on.
     PrintLine(TEXT("Press enter to continue..."));
+    HiddenWord = TEXT("cow");
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
