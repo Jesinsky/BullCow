@@ -7,10 +7,10 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 
     // Welcoming the player.
     PrintLine(TEXT("Elcome to Bull Cows!"));
-    PrintLine(TEXT("Guess the 3 letter word!")); // Need to remove the number later on.
+    PrintLine(TEXT("Guess the 3 letter word!")); // Magic Number.
     PrintLine(TEXT("Press enter to continue..."));
 
-    SetupGame(); // Setting up game.
+    SetupGame();
 
 
     // Prompt player for guess.
@@ -28,6 +28,11 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     }
     else
     {
+        if (Input.Len() != HiddenWord.Len())
+        {
+            PrintLine(TEXT("The hidden word is 3 characters long, try agin!")); // Magic Number.
+        }
+
         PrintLine(TEXT("You have lost!"));
     }
     // Check if isogram.
