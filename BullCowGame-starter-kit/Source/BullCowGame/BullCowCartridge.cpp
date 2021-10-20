@@ -5,13 +5,14 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
 
-    // Welcoming the player.
-    PrintLine(TEXT("Elcome to Bull Cows!"));
-    PrintLine(TEXT("Guess the 3 letter word!")); // Magic Number.
-    PrintLine(TEXT("Press enter to continue..."));
-
     SetupGame();
 
+    PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); // Debug line.
+
+    // Welcoming the player.
+    PrintLine(TEXT("Elcome to Bull Cows!"));
+    PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
+    PrintLine(TEXT("Type in your guess and press enter to continue..."));
 
     // Prompt player for guess.
 }
@@ -25,15 +26,17 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     if (Input == HiddenWord)
     {
         PrintLine(TEXT("Yo have won!"));
+        // bGameOver = true;
     }
     else
     {
         if (Input.Len() != HiddenWord.Len())
         {
-            PrintLine(TEXT("The hidden word is 3 characters long, try agin!")); // Magic Number.
+            PrintLine(TEXT("The hidden word is %i characters long, try agin!"), HiddenWord.Len());
         }
 
         PrintLine(TEXT("You have lost!"));
+        // bGameOver = true;
     }
     // Check if isogram.
     // Prompt to guess again.
@@ -50,11 +53,10 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     // Check user input.
     // PlayAgain or Quit.
 
-
 }
 
 void UBullCowCartridge::SetupGame()
 {
-    HiddenWord = TEXT("cow");
+    HiddenWord = TEXT("cows");
     Lives = 3;
 }
