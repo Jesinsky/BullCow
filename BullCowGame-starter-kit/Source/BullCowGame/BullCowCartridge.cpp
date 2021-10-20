@@ -8,36 +8,35 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     SetupGame();
 
     PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); // Debug line.
-
-    // Welcoming the player.
-    PrintLine(TEXT("Elcome to Bull Cows!"));
-    PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
-    PrintLine(TEXT("Type in your guess and press enter to continue..."));
-
-    // Prompt player for guess.
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
 {
     ClearScreen();
 
-    // Checking players guess.
-
-    if (Input == HiddenWord)
+    // else Checking players guess.
+    if (bGameOver)
     {
-        PrintLine(TEXT("Yo have won!"));
-        // bGameOver = true;
+        ClearScreen();
+        SetupGame();
     }
-    else
+    else // Checking the PLayerGuess
     {
-        if (Input.Len() != HiddenWord.Len())
+        if (Input == HiddenWord)
         {
-            PrintLine(TEXT("The hidden word is %i characters long, try agin!"), HiddenWord.Len());
+            PrintLine(TEXT("Yo have won!"));
+            EndGame();
         }
-
-        PrintLine(TEXT("You have lost!"));
-        // bGameOver = true;
+        else
+        {
+            if (Input.Len() != HiddenWord.Len())
+            {
+                PrintLine(TEXT("The hidden word is %i characters long. You have lost!"), HiddenWord.Len());
+                EndGame();
+            }
+        }    
     }
+    
     // Check if isogram.
     // Prompt to guess again.
     // Check right number of characters.
@@ -57,6 +56,19 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 
 void UBullCowCartridge::SetupGame()
 {
+    // Welcoming the player.
+    PrintLine(TEXT("Welcome to Bull Cows!"));
+
     HiddenWord = TEXT("cows");
     Lives = 3;
+    bGameOver = false;
+
+    PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
+    PrintLine(TEXT("Type in your guess.\nPress enter to continue...")); // Prompt player for guess.
+}
+
+void UBullCowCartridge::EndGame()
+{
+    bGameOver = true;
+    PrintLine(TEXT("Press enter to play again."));
 }
