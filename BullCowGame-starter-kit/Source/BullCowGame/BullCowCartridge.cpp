@@ -12,8 +12,6 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
 {
-    ClearScreen();
-
     // else Checking players guess.
     if (bGameOver)
     {
@@ -29,8 +27,8 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
         }
         else
         {
-            --Lives;
             PrintLine(TEXT("Lost a life!"));
+            PrintLine(TEXT("%i"), --Lives);
             if (Lives > 0)
             {
                 if (Input.Len() != HiddenWord.Len())
