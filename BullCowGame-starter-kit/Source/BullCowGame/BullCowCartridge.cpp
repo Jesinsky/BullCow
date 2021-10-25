@@ -36,6 +36,8 @@ void UBullCowCartridge::SetupGame()
     PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
     PrintLine(TEXT("You have %i Lives!"), Lives);
     PrintLine(TEXT("Type in your guess and \npress enter to continue...")); // Prompt player for guess.
+
+    IsIsogram(HiddenWord);
 }
 
 void UBullCowCartridge::EndGame()
@@ -91,9 +93,14 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
     // PlayAgain or Quit. 
 }
 
-bool UBullCowCartridge::IsIsogram(FString Word)
+bool UBullCowCartridge::IsIsogram(FString Word) const
 {
     // loop trough the HiddenWord.Len()
+    for (int32 Index = 0; Index < Word.Len(); Index++)
+    {
+        PrintLine(TEXT("%c"), Word[Index]);
+    }
+    
     // Check no repiting letters in the word
     // if the Input == HiddenWord return true
 
