@@ -52,13 +52,6 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
         EndGame();
         return;
     }
-     // Check if isogram.
-    if (!IsIsogram(Guess))
-    {
-        PrintLine(TEXT("No repeating letter, guess again"));
-        return;
-    }
-    
 
     if (Guess.Len() != HiddenWord.Len())
     {
@@ -66,6 +59,14 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
         PrintLine(TEXT("Sorry, try to guessing again! \nYou have %i lives remaining"), Lives);
         return;
     }
+
+    // Check if isogram.
+    if (!IsIsogram(Guess))
+    {
+        PrintLine(TEXT("No repeating letter, guess again"));
+        return;
+    }
+    
     // Remove life
     PrintLine(TEXT("Lost a life!"));
     --Lives;
