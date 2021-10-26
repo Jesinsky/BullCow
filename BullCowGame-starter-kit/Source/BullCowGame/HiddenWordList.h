@@ -1,3 +1,4 @@
+#pragma once
 #include "CoreMinimal.h"
 
 const TArray<FString> Words = 
@@ -1002,4 +1003,4 @@ const TArray<FString> Words =
     TEXT("young"),
     TEXT("your"),
     TEXT("yourself")
-}
+};

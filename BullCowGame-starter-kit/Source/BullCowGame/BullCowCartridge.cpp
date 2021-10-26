@@ -8,7 +8,14 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 
     SetupGame();
 
+    PrintLine(TEXT("The number of possible words is %i"), Words.Num());
     PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); // Debug line.
+
+    for (int32 Index = 0; Index < 5; Index++)
+    {
+        PrintLine(TEXT("%s"), *Words[Index]);
+    }
+    
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
@@ -85,13 +92,6 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
 
     // Show the player Bulls and Cows.
     PrintLine(TEXT("Guess again, you have %i lives left"), Lives);
-    // Check if lives > 0.
-    // If yes GuessAgain.
-    // Show lives left.
-    // If no show GameOver and HiddenWord.
-    // Prompt to play again, Press enter to PlayAgain.
-    // Check user input.
-    // PlayAgain or Quit. 
 }
 
 bool UBullCowCartridge::IsIsogram(FString Word) const
@@ -111,7 +111,4 @@ bool UBullCowCartridge::IsIsogram(FString Word) const
         
     }
     return true;
-    // loop trough the HiddenWord.Len()
-    // Check no repiting letters in the word
-    // if the Input == HiddenWord return true
 }
