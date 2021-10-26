@@ -95,14 +95,22 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
 
 bool UBullCowCartridge::IsIsogram(FString Word) const
 {
-    // loop trough the HiddenWord.Len()
+    // int32 Index = 0; // This is the same as below but with diferent scope, this variables exist in whole function.
+    // int32 Comparison = Index + 1;
+
     for (int32 Index = 0; Index < Word.Len(); Index++)
     {
-        PrintLine(TEXT("%c"), Word[Index]);
+        for (int32 Comparison = Index + 1; Comparison < Word.Len(); Comparison++)
+        {
+            if (Word[Comparison] == Word[Index])
+            {
+                return false;
+            }
+        }
+        
     }
-    
+    return true;
+    // loop trough the HiddenWord.Len()
     // Check no repiting letters in the word
     // if the Input == HiddenWord return true
-
-    return true;
 }
