@@ -13,7 +13,7 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); // Debug line.
 }
 
-void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
+void UBullCowCartridge::OnInput(const FString& PlayerInput) // When the player hits enter
 {
     // else Checking players guess.
     if (bGameOver)
@@ -23,7 +23,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     }
     else // Checking the PLayerGuess
     {
-        ProcessGuess(Input);
+        ProcessGuess(PlayerInput);
     }
 }
 
@@ -49,7 +49,7 @@ void UBullCowCartridge::EndGame()
     PrintLine(TEXT("\nPress enter to play again."));
 }
 
-void UBullCowCartridge::ProcessGuess(FString Guess)
+void UBullCowCartridge::ProcessGuess(const FString& Guess)
 {
     if (Guess == HiddenWord)
     {
@@ -89,7 +89,7 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
     PrintLine(TEXT("Guess again, you have %i lives left"), Lives);
 }
 
-bool UBullCowCartridge::IsIsogram(FString Word) const
+bool UBullCowCartridge::IsIsogram(const FString& Word) const
 {
     // int32 Index = 0; // This is the same as below but with diferent scope, this variables exist in whole function.
     // int32 Comparison = Index + 1;
@@ -108,7 +108,7 @@ bool UBullCowCartridge::IsIsogram(FString Word) const
     return true;
 }
 
-TArray<FString> UBullCowCartridge::GetValidWords(TArray<FString> WordList) const
+TArray<FString> UBullCowCartridge::GetValidWords(const TArray<FString>& WordList) const
 {
     TArray<FString> ValidWords;
 
