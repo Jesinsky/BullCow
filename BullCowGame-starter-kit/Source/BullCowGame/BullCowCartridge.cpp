@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "BullCowCartridge.h"
 #include "HiddenWordList.h"
+// #include "Math/UnrealMathUtility.h" This library was contained in another header file, so its just a reminder
 
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
@@ -8,9 +9,9 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 
     SetupGame();
 
-    PrintLine(TEXT("The number of possible words is %i"), Words.Num());
-    PrintLine(TEXT("The number of valid words is: %i"), GetValidWords(Words).Num());
-    PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); // Debug line.
+    // PrintLine(TEXT("The number of possible words is %i"), Words.Num());
+    // PrintLine(TEXT("The number of valid words is: %i"), GetValidWords(Words).Num());
+    // PrintLine(TEXT("ValidWords - 1 is: %i"), GetValidWords(Words).Num() -1);
 }
 
 void UBullCowCartridge::OnInput(const FString& PlayerInput) // When the player hits enter
@@ -32,15 +33,14 @@ void UBullCowCartridge::SetupGame()
     // Welcoming the player.
     PrintLine(TEXT("Welcome to Bull Cows!"));
 
-    HiddenWord = TEXT("cows");
+    HiddenWord = GetValidWords(Words)[FMath::RandRange(0, GetValidWords(Words).Num() - 1)];
     Lives = HiddenWord.Len();
     bGameOver = false;
 
     PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
     PrintLine(TEXT("You have %i Lives!"), Lives);
     PrintLine(TEXT("Type in your guess and \npress enter to continue...")); // Prompt player for guess.
-
-    IsIsogram(HiddenWord);
+    PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); // Debug line.
 }
 
 void UBullCowCartridge::EndGame()
